@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "studentId": "ABCDEF",
+    "name": "Michael",
+    "googleDriveFolder": "sample-url",
+    "gradingStatus": "UNSUBMITTED",
+    "grade": 1,
+    "reviewerId": "CEDFGH"
+  }
+]

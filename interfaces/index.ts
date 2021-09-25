@@ -16,4 +16,10 @@ export interface Student {
 export interface Paging {
   currentPage: number;
   pageLimit: number;
+  totalData: number;
+}
+
+export interface AuthModal {
+  modalOpen: boolean;
+  onClose(): void;
 }

@@ -12,7 +12,9 @@ const PaginationBar: React.FC<Paging> = ({
     const totalPages = Math.ceil(totalData / pageLimit);
     for (let i = 1; i <= totalPages; i++) {
       item.push(
-        <Pagination.Item active={currentPage === i}>{i}</Pagination.Item>
+        <Pagination.Item active={currentPage === i} key={i}>
+          {i}
+        </Pagination.Item>
       );
     }
     return item;

@@ -9,11 +9,34 @@ import {
   TableCaption,
 } from "@chakra-ui/react";
 import { useChallenge } from "../../hooks";
-import { Button, ButtonGroup } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import PaginationBar from "./PaginationBar";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { LoginAction } from "../../context/actions";
+import { useAuthDispatch, useAuthState } from "../../context/context";
+import AuthModal from "../Auth/AuthModal";
 
-const DashTable = () => {
+const DashTable = ({ query }) => {
   const { challenges } = useChallenge();
+  // const { query } = useRouter();
+  const { user } = useAuthState();
+  const dispatch = useAuthDispatch();
+  const [modalOpen, setModalOpen] = useState(false);
+
+  console.log(user);
+
+  useEffect(() => {
+    if (query.role === "staff") {
+      LoginAction(dispatch);
+    } else {
+      const token = localStorage.getItem("tokenStudent");
+      console.log(token);
+      if (!token) {
+        setModalOpen(true);
+      }
+    }
+  }, [query.role]);
 
   const renderChallenges = () => {
     return (
@@ -63,13 +86,14 @@ const DashTable = () => {
         </Tr>
       </Thead>
       <Tbody>{renderChallenges()}</Tbody>
-      <Tfoot justifyContent="center">
-        <PaginationBar
-          currentPage={1}
-          pageLimit={10}
-          totalData={challenges.length}
-        />
-      </Tfoot>
+      <PaginationBar
+        currentPage={1}
+        pageLimit={10}
+        totalData={challenges.length}
+      />
+      {modalOpen ? (
+        <AuthModal modalOpen={modalOpen} onClose={() => setModalOpen(false)} />
+      ) : null}
     </Table>
   );
 };

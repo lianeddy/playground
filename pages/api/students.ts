@@ -1,20 +1,13 @@
 import Cors from "cors";
 import initMiddleware from "../../lib/init-middleware";
 import { NextApiRequest, NextApiResponse } from "next";
+import students from "./students.json";
 
 const cors = initMiddleware(
   Cors({
     methods: ["GET", "POST", "PUT"],
   })
 );
-
-const students = [
-  {
-    id: "MI-123",
-    name: "Michael",
-    email: "michael@mail.com",
-  },
-];
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   await cors(req, res);

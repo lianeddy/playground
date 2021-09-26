@@ -9,14 +9,17 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Form } from "react-bootstrap";
+// import { LoginAction } from "../../context/actions";
+import { useAuthDispatch } from "../../context/context";
 import { useStudents } from "../../hooks";
 
 const AuthModal = ({ modalOpen, onClose }) => {
-  const { students, setStudentLogin } = useStudents();
+  const { students } = useStudents();
   const [selectedStudent, setSelectedStudent] = useState("");
+  const dispatch = useAuthDispatch();
 
   const loginHandler = () => {
-    setStudentLogin(selectedStudent);
+    // LoginAction(dispatch, {id: selectedStudent, role: 'student'});
     onClose();
   };
   return (
@@ -35,7 +38,8 @@ const AuthModal = ({ modalOpen, onClose }) => {
             onChange={(e) => setSelectedStudent(e.currentTarget.value)}
           >
             <option>Select Student Auth</option>
-            {students && students.map((val) => <option>{val.name}</option>)}
+            {students &&
+              students.map((val) => <option value={val.id}>{val.name}</option>)}
           </Form.Select>
         </ModalBody>
         <ModalFooter>

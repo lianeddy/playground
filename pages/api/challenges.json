@@ -1,11 +1,29 @@
 [
   {
     "id": 1,
-    "studentId": "ABCDEF",
+    "studentId": "MI-123",
     "name": "Michael",
     "googleDriveFolder": "sample-url",
-    "gradingStatus": "UNSUBMITTED",
+    "gradingStatus": "GRADE_FAILED",
+    "grade": 5,
+    "reviewerId": "EM-321"
+  },
+  {
+    "id": 2,
+    "studentId": "EM-321",
+    "name": "Emma",
+    "googleDriveFolder": "sample-url",
+    "gradingStatus": "GRADE_PASSED",
     "grade": 1,
-    "reviewerId": "CEDFGH"
+    "reviewerId": "MI-123"
+  },
+  {
+    "id": 3,
+    "studentId": "MI-123",
+    "name": "Michael",
+    "googleDriveFolder": "sample-url",
+    "gradingStatus": "GRADE_PASSED",
+    "grade": 4,
+    "reviewerId": "EM-321"
   }
 ]

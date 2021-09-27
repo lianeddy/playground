@@ -20,7 +20,8 @@ export default function Home() {
           <a href="/api/hello">API example</a> for references to do the backend
           work in this repository
         </p>
-          <Link href={"/dashboard?staff"}>Click me</Link>
+          <Link href={"/dashboard?role=
+staff"}>Click me</Link>
       </main>
 
       <footer className={styles.footer}></footer>

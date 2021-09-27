@@ -17,6 +17,8 @@ export interface Paging {
   currentPage: number;
   pageLimit: number;
   totalData: number;
+  nextPage(): void;
+  previousPage():void;
 }
 
 export interface AuthModal {

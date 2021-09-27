@@ -5,7 +5,8 @@ import { useAuthDispatch } from "../../context/context";
 const NaviBar = () => {
   return (
     <Navbar bg="light" expand="lg">
-      <Container>
+      <Container style={{marginLeft: "100px", marginRight: '100px'}}>
+
         <Navbar.Brand href="#home">Dashboard</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

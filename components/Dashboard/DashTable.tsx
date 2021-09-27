@@ -22,6 +22,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import AddChallengeModal from "./AddChallengeModal";
 
 const gradeRange = [1, 2, 3, 4, 5];
+const pageLimit = 10;
 
 const DashTable = ({ query }) => {
   const { user } = useAuthState();
@@ -41,6 +42,7 @@ const DashTable = ({ query }) => {
   const [selectedStudentId, setSelectedStudentId] = useState("");
   const [selectedChallengeId, setSelectedChallengeId] = useState("");
   const [tabIndex, setTabIndex] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1); 
 
   useEffect(() => {
     if (query.role === "staff") {
@@ -52,15 +54,17 @@ const DashTable = ({ query }) => {
     return () => {
       setChallenges([]);
     };
-  }, [user, query.role]);
+  }, [user.id, query.role]);
 
   useEffect(() => {
     if (query.role === "staff") {
       fetchChallenges();
     } else {
-      fetchMyCreatedChallenge(user.id);
+      if(tabIndex === 0){
+        fetchMyCreatedChallenge(user.id);
+      }
     }
-  }, [reviewerModalOpen, addChallengeModalOpen]);
+  }, [reviewerModalOpen, addChallengeModalOpen, user.id]);
 
   useEffect(() => {
     if (tabIndex === 0 && query.role === "student") {
@@ -69,6 +73,14 @@ const DashTable = ({ query }) => {
       fetchReviewChallengesStudent(user.id);
     }
   }, [tabIndex]);
+
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1)
+  }
+
+  const previousPage = () => {
+    setCurrentPage(currentPage - 1)
+  }
 
   const handleSelectedId = (studentId, id) => {
     setSelectedChallengeId(id);
@@ -117,7 +129,6 @@ const DashTable = ({ query }) => {
               </Td>
               <Td>{reviewerId}</Td>
               <Td>
-                <Button colorScheme="red">Grade</Button>
                 <Button
                   colorScheme="teal"
                   onClick={() => handleSelectedId(studentId, id)}
@@ -156,8 +167,7 @@ const DashTable = ({ query }) => {
               <Td>{grade}</Td>
               <Td>{reviewerId}</Td>
               <Td>
-                <Button colorScheme="red">Student</Button>
-                <Button colorScheme="red">Delete</Button>
+
               </Td>
             </Tr>
           );
@@ -192,7 +202,7 @@ const DashTable = ({ query }) => {
           {query.role === "staff" ? renderStaffTable() : renderStudentTable()}
         </Tbody>
         <Tfoot>
-          {query.role === "student" ? (
+          {query.role === "student" && tabIndex === 0 ? (
             <Tr>
               <Button onClick={() => setAddChallengeModalOpen(true)}>
                 Add Challenge
@@ -200,7 +210,9 @@ const DashTable = ({ query }) => {
             </Tr>
           ) : null}
           <PaginationBar
-            currentPage={1}
+            currentPage={currentPage}
+            nextPage={nextPage}
+            previousPage={previousPage}
             pageLimit={10}
             totalData={challenges.length}
           />

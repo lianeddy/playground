@@ -1,11 +1,12 @@
+import React from "react";
 import NaviBar from "../Navbar/Navibar";
 
 const NaviLayout = ({ children }) => {
   return (
-    <div className="container">
+    <React.Fragment>
       <NaviBar />
       {children}
-    </div>
+    </React.Fragment>
   );
 };
 

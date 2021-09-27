@@ -19,8 +19,8 @@ export default function Home() {
           need to do any backend stuff to complete your task check{" "}
           <a href="/api/hello">API example</a> for references to do the backend
           work in this repository
-          <Link href={"/dashboard"}>Click me</Link>
         </p>
+          <Link href={"/dashboard?staff"}>Click me</Link>
       </main>
 
       <footer className={styles.footer}></footer>

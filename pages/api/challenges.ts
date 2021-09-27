@@ -1,9 +1,9 @@
 import Cors from "cors";
 import initMiddleware from "../../lib/init-middleware";
 import { NextApiRequest, NextApiResponse } from "next";
-import challenges from "./challenges.json";
+import challenges from "../api/challenges.json";
 import fs from "fs";
-// import path from "path";
+import path from "path";
 
 const cors = initMiddleware(
   Cors({
@@ -11,7 +11,7 @@ const cors = initMiddleware(
   })
 );
 
-// const filePath = path.join(__dirname, "challenges.json");
+const filePath = path.join(__dirname, "challenges.json");
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   await cors(req, res);
@@ -28,11 +28,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       const editedData = challenges;
       req.body.id = challenges.length + 1;
       editedData.push(req.body);
-      fs.writeFileSync("./challenges.json", JSON.stringify(editedData));
+      fs.writeFileSync("./pages/api/challenges.json", JSON.stringify(editedData));
       const queryFilter = challenges.filter(
         (val) => val.studentId === req.query.studentId
       );
-      // console.log(challenges);
+      console.log(challenges);
       return res.status(200).send(queryFilter);
     case "PUT":
       try {
@@ -45,8 +45,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         });
         selectedData.reviewerId = req.body.reviewerId;
         editedData[selectedDataIdx] = selectedData;
-        fs.writeFileSync("./challenges.json", JSON.stringify(editedData));
-        const response = fs.readFileSync("./challenges.json");
+        fs.writeFileSync("./pages/api/challenges.json", JSON.stringify(editedData));
+        const response = fs.readFileSync("./pages/api/challenges.json");
         // fs.writeFile("challenges.json", JSON.stringify(editedData), (err) => {
         //   if (err) return res.status(500).send(err);
         //   console.log("File written successfully\n");
@@ -69,8 +69,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         selectedData.gradingStatus = req.body.gradingStatus;
         selectedData.grade = parseInt(req.body.gradeValue);
         editedData[selectedDataIdx] = selectedData;
-        fs.writeFileSync("./challenges.json", JSON.stringify(editedData));
-        const response = fs.readFileSync("./challenges.json");
+        fs.writeFileSync("./pages/api/challenges.json", JSON.stringify(editedData));
+        const response = fs.readFileSync("./pages/api/challenges.json");
         // fs.writeFile("challenges.json", JSON.stringify(editedData), (err) => {
         //   if (err) return res.status(500).send(err);
         //   console.log("File written successfully\n");

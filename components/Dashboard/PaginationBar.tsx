@@ -6,6 +6,8 @@ const PaginationBar: React.FC<Paging> = ({
   currentPage,
   pageLimit,
   totalData,
+  nextPage, 
+  previousPage
 }) => {
   const renderPaginate = () => {
     const item = [];

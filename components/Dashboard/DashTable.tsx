@@ -42,7 +42,7 @@ const DashTable = ({ query }) => {
   const [selectedStudentId, setSelectedStudentId] = useState("");
   const [selectedChallengeId, setSelectedChallengeId] = useState("");
   const [tabIndex, setTabIndex] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1); 
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     if (query.role === "staff") {
@@ -60,7 +60,7 @@ const DashTable = ({ query }) => {
     if (query.role === "staff") {
       fetchChallenges();
     } else {
-      if(tabIndex === 0){
+      if (tabIndex === 0) {
         fetchMyCreatedChallenge(user.id);
       }
     }
@@ -75,12 +75,12 @@ const DashTable = ({ query }) => {
   }, [tabIndex]);
 
   const nextPage = () => {
-    setCurrentPage(currentPage + 1)
-  }
+    setCurrentPage(currentPage + 1);
+  };
 
   const previousPage = () => {
-    setCurrentPage(currentPage - 1)
-  }
+    setCurrentPage(currentPage - 1);
+  };
 
   const handleSelectedId = (studentId, id) => {
     setSelectedChallengeId(id);
@@ -166,9 +166,7 @@ const DashTable = ({ query }) => {
               <Td>{gradingStatus}</Td>
               <Td>{grade}</Td>
               <Td>{reviewerId}</Td>
-              <Td>
-
-              </Td>
+              <Td></Td>
             </Tr>
           );
         }
@@ -209,14 +207,14 @@ const DashTable = ({ query }) => {
               </Button>
             </Tr>
           ) : null}
-          <PaginationBar
+          {/* <PaginationBar
             currentPage={currentPage}
             nextPage={nextPage}
             previousPage={previousPage}
             pageLimit={10}
             totalData={challenges.length}
             role={query.role}
-          />
+          /> */}
         </Tfoot>
 
         {modalAuthOpen ? (

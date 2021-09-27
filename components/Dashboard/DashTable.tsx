@@ -215,6 +215,7 @@ const DashTable = ({ query }) => {
             previousPage={previousPage}
             pageLimit={10}
             totalData={challenges.length}
+            role={query.role}
           />
         </Tfoot>
 

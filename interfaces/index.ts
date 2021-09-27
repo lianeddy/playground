@@ -19,6 +19,7 @@ export interface Paging {
   totalData: number;
   nextPage(): void;
   previousPage():void;
+  role: string;
 }
 
 export interface AuthModal {
